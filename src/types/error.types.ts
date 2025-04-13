@@ -13,4 +13,4 @@ export interface ErrorResponse {
   message: string;
   errors?: ValidationError[];
   statusCode: number;
-} 
+}
