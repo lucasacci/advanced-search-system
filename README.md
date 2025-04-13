@@ -205,31 +205,10 @@ The search endpoint (`/products/search`) accepts the following query parameters:
 curl "http://localhost:3000/products?searchTerm=bike&category=electronics&minPrice=1&maxPrice=1000&limit=10&sortBy=price&sortDirection=desc&page=1"
 ```
 
-## Testing
-
-1. Run the test suite:
-   ```bash
-   # Unit tests
-   npm run test
-
-   # e2e tests
-   npm run test:e2e
-
-   # Test coverage
-   npm run test:cov
-   ```
-
-2. The test suite includes:
-   - Unit tests for services and controllers
-   - Integration tests for the search functionality
-   - Performance tests with the seeded database
-
 ## Performance Testing
 
 The system includes 1000 test products for performance testing. To run performance tests:
 
-```bash
-# Generate test data
-npm run seed
+
 
 
