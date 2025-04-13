@@ -6,4 +6,4 @@ export const swaggerConfig = new DocumentBuilder()
   .setVersion('1.0')
   .addTag('products', 'Endpoints relacionados con productos')
   .addTag('search', 'Endpoints de búsqueda y autocompletado')
-  .build(); 
+  .build();

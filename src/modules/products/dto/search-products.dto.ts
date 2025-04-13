@@ -1,66 +1,76 @@
-import { IsString, IsOptional, IsNumber, Min, IsArray, IsIn } from 'class-validator';
+import {
+  IsString,
+  IsOptional,
+  IsNumber,
+  Min,
+  IsArray,
+  IsIn,
+} from 'class-validator';
 import { ApiPropertyOptional } from '@nestjs/swagger';
 import { Type } from 'class-transformer';
+import { MinLength } from 'class-validator';
 
 export class SearchProductsDto {
-  @ApiPropertyOptional({ description: 'Término de búsqueda' })
-  @IsString()
+  @ApiPropertyOptional({ description: 'Search term' })
   @IsOptional()
+  @IsString()
+  @MinLength(1, { message: 'Search term cannot be empty' })
   searchTerm?: string;
 
-  @ApiPropertyOptional({ description: 'Categoría del producto' })
-  @IsString()
+  @ApiPropertyOptional({ description: 'Product category' })
   @IsOptional()
+  @IsString()
   category?: string;
 
-  @ApiPropertyOptional({ description: 'Ubicación del producto' })
-  @IsString()
+  @ApiPropertyOptional({ description: 'Product location' })
   @IsOptional()
+  @IsString()
   location?: string;
 
-  @ApiPropertyOptional({ description: 'Etiquetas del producto' })
+  @ApiPropertyOptional({ description: 'Product tags' })
+  @IsOptional()
   @IsArray()
   @IsString({ each: true })
-  @IsOptional()
   tags?: string[];
 
-  @ApiPropertyOptional({ description: 'Precio mínimo' })
+  @ApiPropertyOptional({ description: 'Minimum price' })
+  @IsOptional()
+  @Type(() => Number)
   @IsNumber()
   @Min(0)
-  @Type(() => Number)
-  @IsOptional()
   minPrice?: number;
 
-  @ApiPropertyOptional({ description: 'Precio máximo' })
+  @ApiPropertyOptional({ description: 'Maximum price' })
+  @IsOptional()
+  @Type(() => Number)
   @IsNumber()
   @Min(0)
-  @Type(() => Number)
-  @IsOptional()
   maxPrice?: number;
 
-  @ApiPropertyOptional({ description: 'Página actual', default: 1 })
-  @IsNumber()
-  @Min(1)
-  @Type(() => Number)
+  @ApiPropertyOptional({ description: 'Current page', default: 1 })
   @IsOptional()
-  page?: number = 1;
-
-  @ApiPropertyOptional({ description: 'Elementos por página', default: 10 })
-  @IsNumber()
-  @Min(1)
-  @Type(() => Number)
-  @IsOptional()
-  limit?: number = 10;
-
-  @ApiPropertyOptional({ description: 'Campo por el cual ordenar', enum: ['name', 'price', 'createdAt', 'updatedAt'] })
   @IsString()
-  @IsIn(['name', 'price', 'createdAt', 'updatedAt'])
+  page?: string;
+
+  @ApiPropertyOptional({ description: 'Elements per page', default: 10 })
   @IsOptional()
+  @IsString()
+  limit?: string;
+
+  @ApiPropertyOptional({
+    description: 'Field to sort by',
+    enum: ['name', 'price', 'createdAt', 'updatedAt'],
+  })
+  @IsOptional()
+  @IsString()
   sortBy?: string;
 
-  @ApiPropertyOptional({ description: 'Dirección del ordenamiento', enum: ['asc', 'desc'], default: 'asc' })
-  @IsString()
-  @IsIn(['asc', 'desc'])
+  @ApiPropertyOptional({
+    description: 'Sort direction',
+    enum: ['asc', 'desc'],
+    default: 'asc',
+  })
   @IsOptional()
-  sortDirection?: 'asc' | 'desc' = 'asc';
+  @IsString()
+  sortDirection?: 'asc' | 'desc';
 }

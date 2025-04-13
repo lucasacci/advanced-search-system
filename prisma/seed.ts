@@ -55,25 +55,25 @@ function generateRandomProduct() {
   // Select random category and location
   const category = faker.helpers.arrayElement(categories);
   const location = faker.helpers.arrayElement(locations);
-  
+
   // Generate name based on category
   const name = `${faker.commerce.productAdjective()} ${faker.commerce.product()} ${faker.commerce.productName()}`;
-  
+
   // Generate description
   const description = faker.commerce.productDescription();
-  
+
   // Generate price between 10 and 1000
   const price = parseFloat(
     faker.commerce.price({ min: 10, max: 1000, dec: 2 }),
   );
-  
+
   // Generate stock between 0 and 100
   const stock = faker.number.int({ min: 0, max: 100 });
-  
+
   // Select 2-5 random tags
   const numTags = faker.number.int({ min: 2, max: 5 });
   const tags = faker.helpers.arrayElements(allTags, numTags);
-  
+
   return {
     name,
     description,
@@ -87,14 +87,14 @@ function generateRandomProduct() {
 
 async function main() {
   console.log('🌱 Starting product seeding...');
-  
+
   // Clean database
   await prisma.product.deleteMany();
   console.log('🗑️ Database cleaned');
-  
+
   // Generate 1000 products
   const products = Array.from({ length: 1000 }, generateRandomProduct);
-  
+
   // Insert products in batches of 100 for better performance
   const batchSize = 100;
   for (let i = 0; i < products.length; i += batchSize) {

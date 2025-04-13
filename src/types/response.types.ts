@@ -22,4 +22,4 @@ export interface SearchResponse<T> extends PaginatedApiResponse<T> {
     locations: string[];
     relatedTerms: string[];
   };
-} 
+}

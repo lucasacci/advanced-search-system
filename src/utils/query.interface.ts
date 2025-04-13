@@ -1,91 +1,25 @@
-import { Prisma } from '@prisma/client';
+import { QueryFilter, buildWhere } from './filter.interface';
+import { SortOptions, buildOrderBy } from './sort.interface';
+import {
+  PaginationOptions,
+  buildPagination,
+  PaginationResult,
+} from './pagination.interface';
 
-export interface PaginationOptions {
-  page?: number;
-  limit?: number;
-}
-
-export interface PaginationResult<T> {
-  data: T[];
-  pagination: {
-    total: number;
-    page: number;
-    limit: number;
-    totalPages: number;
-  };
-}
-
-export interface SortOptions {
-  field: string;
-  direction: 'asc' | 'desc';
-}
-
-export interface QueryFilter<T> {
-  searchTerm?: string;
-  filters?: Record<string, any>;
-  sort?: SortOptions;
-  pagination?: PaginationOptions;
-}
+export {
+  QueryFilter,
+  buildWhere,
+  SortOptions,
+  buildOrderBy,
+  PaginationOptions,
+  PaginationResult,
+  buildPagination,
+};
 
 export interface QueryBuilder<T> {
   buildWhere(filter: QueryFilter<T>): T;
   buildOrderBy(sort?: SortOptions): any;
   buildPagination(options?: PaginationOptions): { skip: number; take: number };
-}
-
-export function buildWhere<T>(filter: QueryFilter<T>): any {
-  const where: any = {};
-
-  if (filter.searchTerm) {
-    where.OR = [
-      { name: { contains: filter.searchTerm, mode: 'insensitive' } },
-      { description: { contains: filter.searchTerm, mode: 'insensitive' } },
-    ];
-  }
-
-  if (filter.filters) {
-    Object.entries(filter.filters).forEach(([key, value]) => {
-      if (value !== undefined && value !== null) {
-        if (Array.isArray(value)) {
-          where[key] = { hasSome: value };
-        } else if (typeof value === 'string') {
-          where[key] = { contains: value, mode: 'insensitive' };
-        } else if (typeof value === 'object') {
-          where[key] = value;
-        } else {
-          where[key] = value;
-        }
-      }
-    });
-  }
-
-  return where;
-}
-
-export function buildOrderBy(sort?: SortOptions): any {
-  if (!sort) {
-    return { createdAt: 'desc' };
-  }
-
-  return {
-    [sort.field]: sort.direction,
-  };
-}
-
-export function buildPagination(
-  options?: PaginationOptions,
-): {
-  skip: number;
-  take: number;
-} {
-  const page = Number(options?.page) || 1;
-  const limit = Number(options?.limit) || 10;
-  const skip = (page - 1) * limit;
-
-  return {
-    skip,
-    take: limit,
-  };
 }
 
 export async function executeQuery<T>(
@@ -108,4 +42,4 @@ export async function executeQuery<T>(
   ]);
 
   return { data, total };
-} 
+}

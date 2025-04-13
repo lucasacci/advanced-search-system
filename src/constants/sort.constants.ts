@@ -6,4 +6,4 @@ export const PRODUCT_SORT_FIELDS = [
   'price',
   'createdAt',
   'updatedAt',
-] as const; 
+] as const;
