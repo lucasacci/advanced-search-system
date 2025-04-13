@@ -2,6 +2,24 @@
 
 A powerful search system built with NestJS and PostgreSQL, featuring advanced filtering, sorting, and autocomplete capabilities.
 
+## Live Demo
+
+The application is deployed and available at:
+- API URL: [https://advanced-search-system.onrender.com](https://advanced-search-system.onrender.com)
+- API Documentation (Swagger): [https://advanced-search-system.onrender.com/api](https://advanced-search-system.onrender.com/api)
+
+You can test the search functionality with requests like:
+```bash
+# Get all products
+curl "https://advanced-search-system.onrender.com/products?limit=10"
+
+# Search for products
+curl "https://advanced-search-system.onrender.com/products?searchTerm=bike&category=electronics&minPrice=1&maxPrice=1000&limit=10&sortBy=price&sortDirection=desc&page=1"
+
+# Get autocomplete suggestions
+curl "https://advanced-search-system.onrender.com/products/autocomplete?searchTerm=bik"
+```
+
 ## Features
 
 - 🔍 Advanced search with multiple filters
