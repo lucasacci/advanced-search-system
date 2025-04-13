@@ -191,7 +191,6 @@ The search endpoint (`/products/search`) accepts the following query parameters:
 - `searchTerm` - Text to search in name and description
 - `category` - Filter by category
 - `location` - Filter by location
-- `tags` - Filter by tags (comma-separated)
 - `minPrice` - Minimum price
 - `maxPrice` - Maximum price
 - `page` - Page number (default: 1)
