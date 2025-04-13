@@ -34,30 +34,10 @@ export class ProductsController {
   }
 
   @Get()
-  @ApiOperation({ summary: 'Get all products' })
-  @PaginatedResponseDecorator('Product')
-  findAll(@Query() searchDto: SearchProductsDto) {
-    return this.productsService.findAll(searchDto);
-  }
-
-  @Get('search')
-  @ApiOperation({ summary: 'Search products with filters' })
-  @ApiResponse({
-    status: 200,
-    description: 'Returns the filtered products with pagination and suggestions.',
-  })
-  search(@Query() searchDto: SearchProductsDto) {
+  @ApiOperation({ summary: 'Retrieve products with optional filters' })
+  @ApiResponse({ status: 200, description: 'List of products' })
+  async findAll(@Query() searchDto: SearchProductsDto) {
     return this.productsService.search(searchDto);
-  }
-
-  @Get('autocomplete')
-  @ApiOperation({ summary: 'Get product suggestions' })
-  @ApiResponse({
-    status: 200,
-    description: 'Returns product suggestions based on search term.',
-  })
-  autocomplete(@Query() autocompleteDto: AutocompleteDto) {
-    return this.productsService.autocomplete(autocompleteDto);
   }
 
   @Get(':id')
