@@ -16,8 +16,6 @@ curl "https://advanced-search-system.onrender.com/products?limit=10"
 # Search for products
 curl "https://advanced-search-system.onrender.com/products?searchTerm=bike&category=electronics&minPrice=1&maxPrice=1000&limit=10&sortBy=price&sortDirection=desc&page=1"
 
-# Get autocomplete suggestions
-curl "https://advanced-search-system.onrender.com/products/autocomplete?searchTerm=bik"
 ```
 
 ## Features
