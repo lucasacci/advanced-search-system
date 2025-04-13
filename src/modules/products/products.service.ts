@@ -96,8 +96,8 @@ export class ProductsService {
           ...(category && { category }),
           ...(location && { location }),
           ...(tags?.length && { tags }),
-          ...(minPrice !== undefined && { minPrice }),
-          ...(maxPrice !== undefined && { maxPrice }),
+          ...(minPrice !== undefined && { minPrice: Number(minPrice) }),
+          ...(maxPrice !== undefined && { maxPrice: Number(maxPrice) }),
         },
       });
     }
@@ -149,8 +149,8 @@ export class ProductsService {
         minPrice !== undefined || maxPrice !== undefined
           ? {
               price: {
-                ...(minPrice !== undefined && { gte: minPrice }),
-                ...(maxPrice !== undefined && { lte: maxPrice }),
+                ...(minPrice !== undefined && { gte: Number(minPrice) }),
+                ...(maxPrice !== undefined && { lte: Number(maxPrice) }),
               },
             }
           : {},

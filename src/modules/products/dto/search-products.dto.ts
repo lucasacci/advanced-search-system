@@ -52,7 +52,7 @@ export class SearchProductsDto {
   @IsString()
   page?: string;
 
-  @ApiPropertyOptional({ description: 'Elements per page', default: 10 })
+  @ApiPropertyOptional({ description: 'Items per page', default: 10 })
   @IsOptional()
   @IsString()
   limit?: string;
