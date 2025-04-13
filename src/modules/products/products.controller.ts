@@ -14,7 +14,8 @@ import { UpdateProductDto } from './dto/update-product.dto';
 import { SearchProductsDto } from './dto/search-products.dto';
 import { AutocompleteDto } from './dto/autocomplete.dto';
 import { ApiTags, ApiOperation, ApiResponse } from '@nestjs/swagger';
-import { PaginatedResponseDecorator } from '../../../decorators';
+import { PaginatedResponseDecorator } from 'src/decorators';
+
 
 @ApiTags('products')
 @Controller('products')

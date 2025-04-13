@@ -1,5 +1,5 @@
 import { Injectable } from '@nestjs/common';
-import { PrismaService } from '../../../modules/prisma/prisma.service';
+import { PrismaService } from '../prisma/prisma.service';
 import { CreateProductDto } from './dto/create-product.dto';
 import { UpdateProductDto } from './dto/update-product.dto';
 import { SearchProductsDto } from './dto/search-products.dto';
@@ -9,7 +9,7 @@ import {
   buildWhere,
   buildOrderBy,
   buildPagination,
-} from '../../../utils/query.interface';
+} from '../../utils/query.interface';
 
 @Injectable()
 export class ProductsService {
